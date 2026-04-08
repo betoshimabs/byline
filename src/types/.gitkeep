@@ -1,0 +1,3 @@
+// Definições de tipos TypeScript globais do projeto
+// Ex: Match.ts, Fixture.ts, Article.ts, Player.ts, Standing.ts
+// Tipos vindos da API-Football e do domínio editorial devem ficar aqui

@@ -1,0 +1,3 @@
+// Custom React Hooks
+// Ex: useMatches.ts, useStandings.ts, useArticleGenerator.ts
+// Encapsulam lógica de negócio e chamadas de serviços, deixando as páginas limpas

@@ -1,0 +1,3 @@
+// Páginas da aplicação (uma por rota)
+// Ex: HomePage.tsx, MatchPage.tsx, ArticlePage.tsx
+// Cada página importa componentes de /components e dados de /services

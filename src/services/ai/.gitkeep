@@ -1,0 +1,3 @@
+// Camada de geração de textos via IA
+// generator.ts  → orquestra os dados + prompt para gerar o artigo final
+// prompts.ts    → templates de prompts por tipo de conteúdo (pós-jogo, prévia, ranking)

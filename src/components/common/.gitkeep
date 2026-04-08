@@ -1,0 +1,2 @@
+// Componentes reutilizáveis genéricos (Button, Card, Badge, Modal, etc.)
+// Cada componente em sua própria subpasta: /common/Button/Button.tsx + Button.css

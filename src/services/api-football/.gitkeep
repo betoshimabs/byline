@@ -1,0 +1,5 @@
+// Camada de integração com a API-Football
+// apiFootball.ts  → cliente HTTP base (fetch + headers + error handling)
+// matches.ts      → busca de partidas
+// standings.ts    → tabelas de classificação
+// players.ts      → estatísticas de jogadores

@@ -1,0 +1,3 @@
+// Context providers do React (estado global sem Redux)
+// Ex: ThemeContext.tsx, ArticleContext.tsx
+// Use para estado compartilhado entre páginas que não é local de componente

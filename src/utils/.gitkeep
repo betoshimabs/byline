@@ -1,0 +1,2 @@
+// Funções utilitárias puras (sem side effects, sem estado)
+// Ex: formatDate.ts, formatScore.ts, truncateText.ts, slugify.ts
