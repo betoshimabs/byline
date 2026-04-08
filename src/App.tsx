@@ -18,7 +18,7 @@ function App() {
         onTabChange={setActiveTab}
         hasData={hasData}
       />
-      {activeTab === 'principal' && <HomePage />}
+      {activeTab === 'principal' && <HomePage onAccessDatabase={() => setActiveTab('database')} />}
       {activeTab === 'database'  && <DatabasePage />}
       <Footer />
     </>
