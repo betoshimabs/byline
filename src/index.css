@@ -1,153 +1,226 @@
-/* ============================================================
-   BYLINE — Global Design System
-   Dark editorial aesthetic: glassmorphism + animações fluidas
-   ============================================================ */
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700;800;900&display=swap');
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&family=Outfit:wght@400;700;800;900&display=swap');
-
-/* ── Tokens ───────────────────────────────────────────────── */
+/* ── Temas Base (Editorial & Inteligência) ───────────────── */
 :root {
-  /* Background layers */
-  --bg:            #06060f;
-  --bg-surface:    #0c0c1a;
-  --bg-elevated:   #131325;
-  --bg-hover:      #1a1a32;
+  /* Globais estáticas */
+  --font-display: 'Anton', sans-serif;
+  --font-body: 'Inter', sans-serif;
+  --transition: 0.2s ease;
+  --ease-out: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --r-none: 0px; 
 
-  /* Accent */
-  --accent:        #6366f1;
-  --accent-dim:    rgba(99, 102, 241, 0.15);
-  --accent-glow:   rgba(99, 102, 241, 0.35);
-  --accent-hover:  #4f52df;
-
-  /* Status */
-  --live:          #10b981;
-  --live-dim:      rgba(16, 185, 129, 0.15);
-  --warning:       #f59e0b;
-  --danger:        #ef4444;
-
-  /* Text */
-  --text-primary:   #eeeef8;
-  --text-secondary: #8892a4;
-  --text-muted:     #4a5568;
-
-  /* Borders */
-  --border:         rgba(255, 255, 255, 0.055);
-  --border-strong:  rgba(255, 255, 255, 0.1);
-
-  /* Typography */
-  --font-body:    'Inter', system-ui, sans-serif;
-  --font-display: 'Outfit', system-ui, sans-serif;
-
-  /* Motion */
-  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
-  --transition: 0.2s var(--ease-out);
-
-  /* Radii */
-  --r-sm:  8px;
-  --r-md:  12px;
-  --r-lg:  16px;
-  --r-xl:  24px;
+  /* Default (Classic Editorial) - Como um jornal de papel real, preto no branco. */
+  --bg: #F9F9F9;
+  --bg-surface: #FFFFFF;
+  --bg-hover: #EAEAEA;
+  --bg-elevated: #E5E5E5;
+  --text-primary: #111111;
+  --text-secondary: #333333;
+  --text-muted: #666666;
+  --border: #CCCCCC;
+  --border-strong: #999999;
+  --accent: #D32F2F; /* Manchete Red */
+  --accent-hover: #B71C1C;
+  --accent-dim: rgba(211, 47, 47, 0.1);
+  --accent-glow: transparent;
+  --black: #111111;
+  --white: #F9F9F9;  
+  --live: #27AE60;
+  --live-dim: rgba(39, 174, 96, 0.12);
+  --warning: #F59E0B;
+  --danger: #EF4444;
+  --gray-light: #EEEEEE;
 }
 
-/* ── Reset ────────────────────────────────────────────────── */
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+[data-theme="midnight"] {
+  /* Midnight (Dark News) - Leitura noturna premium. */
+  --bg: #121212;
+  --bg-surface: #1E1E1E;
+  --bg-hover: #2A2A2A;
+  --bg-elevated: #333333;
+  --text-primary: #E0E0E0;
+  --text-secondary: #B0B0B0;
+  --text-muted: #888888;
+  --border: #333333;
+  --border-strong: #555555;
+  --accent: #2962FF; /* Azul Elétrico */
+  --accent-hover: #1565C0;
+  --accent-dim: rgba(41, 98, 255, 0.1);
+  --black: #121212;
+  --white: #E0E0E0;  
+  --gray-light: #1A1A1A;
+}
 
-html { scroll-behavior: smooth; }
+[data-theme="sepia"] {
+  /* Sepia (Vintage Press) - Foco em conforto extremo para leitura. */
+  --bg: #F4ECD8;
+  --bg-surface: #F9F2E3;
+  --bg-hover: #EBE0C7;
+  --bg-elevated: #E3D9BC;
+  --text-primary: #4A3C31;
+  --text-secondary: #5E4E42;
+  --text-muted: #8A7B6B;
+  --border: #DBCDB3;
+  --border-strong: #C4B598;
+  --accent: #D84315; /* Laranja Queimado */
+  --accent-hover: #BF360C;
+  --accent-dim: rgba(216, 67, 21, 0.1);
+  --black: #4A3C31;
+  --white: #F4ECD8;  
+  --gray-light: #EBE0C7;
+}
+
+[data-theme="cyber"] {
+  /* Cyber (Tech IA) - Estilo terminal e dados hiperativos. */
+  --bg: #0F172A;
+  --bg-surface: #1E293B;
+  --bg-hover: #334155;
+  --bg-elevated: #475569;
+  --text-primary: #CBD5E1;
+  --text-secondary: #94A3B8;
+  --text-muted: #64748B;
+  --border: #334155;
+  --border-strong: #475569;
+  --accent: #10B981; /* Verde Terminal/Neon */
+  --accent-hover: #059669;
+  --accent-dim: rgba(16, 185, 129, 0.1);
+  --black: #0F172A;
+  --white: #CBD5E1;  
+  --gray-light: #1E293B;
+}
+
+[data-theme="minimal"] {
+  /* Minimal (High Contrast) - Extremamente limpo, apenas preto e branco puros. */
+  --bg: #FFFFFF;
+  --bg-surface: #FFFFFF;
+  --bg-hover: #F0F0F0;
+  --bg-elevated: #E0E0E0;
+  --text-primary: #000000;
+  --text-secondary: #444444;
+  --text-muted: #777777;
+  --border: #000000;
+  --border-strong: #000000;
+  --accent: #7C3AED; /* Roxo Editorial */
+  --accent-hover: #5B21B6;
+  --accent-dim: rgba(124, 58, 237, 0.1);
+  --black: #000000;
+  --white: #FFFFFF;  
+  --gray-light: #FAFAFA;
+}
+
+/* ── Reset Global ────────────────────────────────────────── */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
 body {
   font-family: var(--font-body);
-  background: var(--bg);
+  background-color: var(--bg);
   color: var(--text-primary);
-  min-height: 100vh;
-  -webkit-font-smoothing: antialiased;
   line-height: 1.5;
-  overflow-x: hidden;
-}
-
-/* Subtle radial gradient backdrop */
-body::before {
-  content: '';
-  position: fixed;
-  inset: 0;
-  background:
-    radial-gradient(ellipse 80% 50% at 50% -10%, rgba(99, 102, 241, 0.1) 0%, transparent 60%),
-    radial-gradient(ellipse 60% 40% at 80% 100%, rgba(139, 92, 246, 0.06) 0%, transparent 60%);
-  pointer-events: none;
-  z-index: 0;
-}
-
-#root {
-  display: flex;
-  flex-direction: column;
+  -webkit-font-smoothing: antialiased;
   min-height: 100vh;
-  position: relative;
-  z-index: 1;
+  /* transition reduzida para evitar quebra ao mudar tema */
+  transition: background-color 0.3s ease, color 0.3s ease; 
 }
 
-/* ── Scrollbar ────────────────────────────────────────────── */
-::-webkit-scrollbar { width: 6px; }
-::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: var(--bg-elevated); border-radius: 3px; }
-::-webkit-scrollbar-thumb:hover { background: var(--accent-dim); }
+a { color: var(--accent); text-decoration: none; }
+button { font-family: inherit; }
 
-/* ── Utilities ────────────────────────────────────────────── */
-.glass {
+/* ── Utilidades Editoriais ───────────────────────────────── */
+.title-display {
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  font-weight: 400;
+  letter-spacing: 0.02em; /* Mais espaçado, menos "esmagado" */
+}
+
+.block-solid {
   background: var(--bg-surface);
   border: 1px solid var(--border);
-  backdrop-filter: blur(12px);
+  box-shadow: none; /* Retirado os box-shadows para um ar impresso */
 }
 
-.glass-elevated {
-  background: var(--bg-elevated);
-  border: 1px solid var(--border-strong);
-  backdrop-filter: blur(16px);
+.block-outline {
+  border: 1px solid var(--border);
+  background: transparent;
+}
+
+.btn-brutal {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  letter-spacing: 0.05em;
+  padding: 10px 24px;
+  border: 2px solid var(--black);
+  cursor: pointer;
+  transition: all var(--transition);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-brutal--primary {
+  background: var(--black);
+  color: var(--white);
+}
+
+.btn-brutal--primary:hover {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+.btn-brutal--outline {
+  background: transparent;
+  color: var(--black);
+}
+
+.btn-brutal--outline:hover {
+  background: var(--black);
+  color: var(--white);
 }
 
 .tag {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
   padding: 4px 10px;
-  border-radius: 100px;
-  font-size: 0.72rem;
-  font-weight: 600;
-  letter-spacing: 0.04em;
+  font-size: 0.75rem;
+  font-weight: 700;
   text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border: 1px solid var(--border);
 }
 
-.tag--live   { background: var(--live-dim); color: var(--live); }
-.tag--accent { background: var(--accent-dim); color: var(--accent); }
-.tag--muted  { background: var(--bg-elevated); color: var(--text-muted); }
+.tag--accent {
+  background: var(--accent);
+  color: var(--white);
+  border-color: var(--accent);
+}
 
-/* ── Animations ───────────────────────────────────────────── */
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(16px); }
-  to   { opacity: 1; transform: translateY(0); }
+.pattern-dots {
+  background-image: radial-gradient(var(--border) 1px, transparent 0);
+  background-size: 16px 16px;
+}
+
+/* Redução dos multiplicadores de proporção das fontes */
+/* Isso resolve o problema das fontes gigantes parecendo Portal de Esporte em excesso */
+html {
+  font-size: 15px; /* Fonte base um pouco menor para dar fôlego ao conteúdo estilo jornal */
+}
+
+/* Animações Muted */
+.animate-snap {
+  animation: snapIn 0.3s var(--ease-out) both;
+}
+
+@keyframes snapIn {
+  0% { opacity: 0; transform: translateY(5px); }
+  100% { opacity: 1; transform: translateY(0); }
 }
 
 @keyframes pulse-dot {
-  0%, 100% { opacity: 0.4; transform: scale(0.85); }
-  50%       { opacity: 1;   transform: scale(1); }
-}
-
-@keyframes shimmer {
-  from { background-position: -200% center; }
-  to   { background-position: 200% center; }
-}
-
-.animate-fade-up {
-  animation: fadeUp 0.5s var(--ease-out) both;
-}
-
-/* ── Skeleton ─────────────────────────────────────────────── */
-.skeleton {
-  background: linear-gradient(
-    90deg,
-    var(--bg-surface) 25%,
-    var(--bg-elevated) 50%,
-    var(--bg-surface) 75%
-  );
-  background-size: 200% auto;
-  animation: shimmer 1.8s linear infinite;
-  border-radius: var(--r-sm);
+  0% { box-shadow: 0 0 0 0 var(--live-dim); }
+  70% { box-shadow: 0 0 0 6px transparent; }
+  100% { box-shadow: 0 0 0 0 transparent; }
 }

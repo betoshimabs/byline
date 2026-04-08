@@ -1,91 +1,86 @@
 import './HomePage.css';
 
-const HomePage: React.FC = () => {
+interface HomePageProps {
+  onAccessDatabase: () => void;
+}
+
+const HomePage: React.FC<HomePageProps> = ({ onAccessDatabase }) => {
   return (
-    <main className="home-page">
+    <main className="home-editorial">
 
-      {/* Hero */}
-      <section className="home-hero animate-fade-up">
-        <div className="hero-badge">
-          <span className="tag tag--accent">✦ Inteligência Editorial</span>
+      {/* Hero: Newspaper Cover Style */}
+      <section className="hero-editorial">
+        <div className="hero-editorial-top">
+          <span className="tag block-outline">EDIÇÃO NACIONAL</span>
+          <span className="hero-meta">ATUALIZADO EM TEMPO REAL</span>
         </div>
-        <h1 className="hero-title">
-          Jornalismo esportivo<br />
-          <span className="hero-title--accent">orquestrado por IA</span>
+
+        <h1 className="hero-headline title-display">
+          SÍNTESE<br />
+          ESPORTIVA
         </h1>
-        <p className="hero-subtitle">
-          BYLINE transforma dados reais do futebol em narrativas editoriais precisas e envolventes.
-          Cada matéria gerada a partir de estatísticas, escalações e eventos ao vivo.
-        </p>
+
+        <div className="hero-grid">
+          <div className="hero-main-col">
+            <h2 className="hero-subheadline">
+              Transforme cada partida do Brasileirão na sua redação autônoma.
+            </h2>
+            <p className="hero-lead">
+              A BYLINE utiliza inteligência artificial avançada para transformar dados brutos e eventos 
+              ao vivo em jornais editoriais completos. Sem drafts manuais. Cobertura ininterrupta de estatísticas, 
+              escalações e lances a cada 90 minutos.
+            </p>
+            <div className="hero-actions">
+               <button className="btn-brutal btn-brutal--primary" onClick={onAccessDatabase}>
+                 ACESSAR DADOS (MERCADO)
+               </button>
+            </div>
+          </div>
+          
+          <div className="hero-side-col">
+            <div className="side-piece">
+              <span className="side-label">PIPELINE ATIVO</span>
+              <ul className="side-list">
+                <li>● Coleta API-Football</li>
+                <li>● Formatação de Escalações</li>
+                <li>● Narrativas Pós-Jogo</li>
+              </ul>
+            </div>
+          </div>
+        </div>
       </section>
 
-      {/* Cards de preview */}
-      <section className="home-grid">
-        <div className="preview-card preview-card--featured glass-elevated">
-          <div className="preview-card__label tag tag--live">⬤ Em construção</div>
-          <h2 className="preview-card__title">Brasileirão 2026</h2>
-          <p className="preview-card__desc">
-            Dados das rodadas 1 e 2 serão carregados na aba{' '}
-            <strong>Base de Dados</strong> para análise e geração de conteúdo editorial.
+      {/* Ticker / Divider */}
+      <div className="editorial-divider">
+        <span className="ticker-text title-display">+++ TEMPORADA 2024 (SÉRIE A) DISPONÍVEL NO DATA CENTER +++ ESTATÍSTICAS COMPLETAS E MOCK LOCAIS +++</span>
+      </div>
+
+      {/* Magazine Block Layout */}
+      <section className="editorial-features">
+        <div className="feature-block block-outline feature-span">
+          <div className="feat-header">
+            <span className="feat-label">01 // AUTOMATIZAÇÃO PÓS-JOGO</span>
+          </div>
+          <h3 className="feat-title title-display">RESENHAS<br/>INSTANTÂNEAS</h3>
+          <p className="feat-desc">
+            Assim que o juiz apita o final da partida, o motor da BYLINE cruza dados de gols, 
+            posse de bola e cartões para gerar um artigo opinativo profundo, simulando os melhores 
+            colunistas esportivos.
           </p>
-          <div className="preview-card__meta">
-            <span>🏟 20 partidas</span>
-            <span>📊 Estatísticas completas</span>
-            <span>🤖 Geração via IA</span>
-          </div>
         </div>
 
-        <div className="preview-card glass">
-          <div className="preview-card__icon">📰</div>
-          <h3 className="preview-card__title preview-card__title--sm">Pós-Jogo</h3>
-          <p className="preview-card__desc">Análise automática de cada partida com gols, estatísticas e destaques individuais.</p>
+        <div className="feature-block block-outline">
+          <div className="feat-header">
+            <span className="feat-label">02 // TÁTICA E ONSIDE</span>
+          </div>
+          <h3 className="feat-title title-display">ANÁLISE DE<br/>ESCALAÇÕES</h3>
         </div>
 
-        <div className="preview-card glass">
-          <div className="preview-card__icon">📋</div>
-          <h3 className="preview-card__title preview-card__title--sm">Escalações</h3>
-          <p className="preview-card__desc">Análise tática de formações e comparativo entre os onze titulares de cada equipe.</p>
-        </div>
-
-        <div className="preview-card glass">
-          <div className="preview-card__icon">⚽</div>
-          <h3 className="preview-card__title preview-card__title--sm">Narração de Gols</h3>
-          <p className="preview-card__desc">Cada gol transformado em uma narrativa editorial com contexto, jogadora e minuto exatos.</p>
-        </div>
-      </section>
-
-      {/* Status pipeline */}
-      <section className="home-pipeline glass">
-        <h3 className="pipeline-title">Pipeline Editorial</h3>
-        <div className="pipeline-steps">
-          <div className="pipeline-step pipeline-step--done">
-            <div className="step-dot step-dot--done" />
-            <div>
-              <div className="step-name">Estrutura base</div>
-              <div className="step-desc">React + TypeScript + Design System</div>
-            </div>
+        <div className="feature-block block-solid">
+          <div className="feat-header">
+            <span className="feat-label" style={{color: 'var(--accent)'}}>03 // LANCES AO VIVO</span>
           </div>
-          <div className="pipeline-step pipeline-step--active">
-            <div className="step-dot step-dot--active" />
-            <div>
-              <div className="step-name">Integração API-Football</div>
-              <div className="step-desc">Busca de dados reais do Brasileirão 2026</div>
-            </div>
-          </div>
-          <div className="pipeline-step">
-            <div className="step-dot" />
-            <div>
-              <div className="step-name">Geração via IA</div>
-              <div className="step-desc">Transformar dados em texto editorial</div>
-            </div>
-          </div>
-          <div className="pipeline-step">
-            <div className="step-dot" />
-            <div>
-              <div className="step-name">Publicação</div>
-              <div className="step-desc">Interface de leitura final</div>
-            </div>
-          </div>
+          <h3 className="feat-title title-display">NARRATIVA<br/>EM TEMPO REAL</h3>
         </div>
       </section>
 

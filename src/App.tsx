@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useDatabase } from './context/DatabaseContext';
 import Header from './components/layout/Header/Header';
+import Footer from './components/layout/Footer/Footer';
 import HomePage from './pages/HomePage/HomePage';
 import DatabasePage from './pages/DatabasePage/DatabasePage';
 
@@ -19,6 +20,7 @@ function App() {
       />
       {activeTab === 'principal' && <HomePage />}
       {activeTab === 'database'  && <DatabasePage />}
+      <Footer />
     </>
   );
 }

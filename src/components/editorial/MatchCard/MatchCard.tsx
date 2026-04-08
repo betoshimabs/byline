@@ -6,10 +6,10 @@ interface MatchCardProps {
 }
 
 const STATUS_LABELS: Record<string, string> = {
-  FT: 'Encerrado', AET: 'Prorrogação', PEN: 'Pênaltis',
-  '1H': 'Ao vivo', HT: 'Intervalo', '2H': 'Ao vivo',
-  NS: 'Não iniciado', PST: 'Adiado', CANC: 'Cancelado', TBD: 'A definir',
-  SUSP: 'Suspenso', ET: 'Prorrogação', P: 'Pênaltis',
+  FT: 'FINALIZADO', AET: 'PRORROGAÇÃO', PEN: 'PÊNALTIS',
+  '1H': 'AO VIVO', HT: 'INTERVALO', '2H': 'AO VIVO',
+  NS: 'A JOGAR', PST: 'ADIADO', CANC: 'CANCELADO', TBD: 'A DEFINIR',
+  SUSP: 'SUSPENSO', ET: 'PRORROGAÇÃO', P: 'PÊNALTIS',
 };
 
 const isLive = (short: string) => ['1H', 'HT', '2H', 'ET', 'BT', 'P', 'LIVE'].includes(short);
@@ -21,18 +21,11 @@ function getGoals(events: FixtureEvent[], teamId: number) {
   );
 }
 
-function getStat(stats: NonNullable<Fixture['statistics']>, teamId: number, type: string) {
-  const teamStats = stats.find(s => s.team.id === teamId);
-  const stat = teamStats?.statistics.find(s => s.type === type);
-  return stat?.value ?? '—';
-}
-
 const MatchCard: React.FC<MatchCardProps> = ({ fixture }) => {
-  const { fixture: info, league, teams, goals, score, events = [], statistics = [] } = fixture;
+  const { fixture: info, league, teams, goals, events = [] } = fixture;
   const statusShort = info.status.short;
   const live = isLive(statusShort);
   const finished = isFinished(statusShort);
-  const pending = !live && !finished;
 
   const homeGoals = events.length ? getGoals(events, teams.home.id) : [];
   const awayGoals = events.length ? getGoals(events, teams.away.id) : [];
@@ -42,83 +35,76 @@ const MatchCard: React.FC<MatchCardProps> = ({ fixture }) => {
   const timeStr = matchDate.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
 
   return (
-    <article className={`match-card ${live ? 'match-card--live' : ''} ${finished ? 'match-card--finished' : ''} ${pending ? 'match-card--pending' : ''}`}>
-
-      {/* Header */}
-      <div className="match-card__header">
-        <span className="match-card__round">{league.round.replace('Regular Season - ', 'Rodada ')}</span>
-        <span className={`match-status ${live ? 'match-status--live' : finished ? 'match-status--done' : 'match-status--pending'}`}>
-          {live && <span className="live-dot" />}
+    <article className="match-card-brutal block-outline">
+      
+      {/* Heavy Header */}
+      <div className={`match-header ${live ? 'bg-accent' : finished ? 'bg-black' : 'bg-white'}`}>
+        <span className="match-round title-display">{league.round.replace('Regular Season - ', 'RD ')}</span>
+        <span className="match-status title-display">
           {live && info.status.elapsed ? `${info.status.elapsed}'` : STATUS_LABELS[statusShort] ?? statusShort}
         </span>
       </div>
 
-      {/* Scoreline */}
-      <div className="match-card__body">
-        <div className="match-team match-team--home">
-          <img className="team-logo" src={teams.home.logo} alt={teams.home.name} loading="lazy" />
-          <span className="team-name">{teams.home.name}</span>
+      {/* Main Score Block */}
+      <div className="match-body">
+        
+        {/* Home Team */}
+        <div className="match-team">
+          <img src={teams.home.logo} alt={teams.home.name} className="team-logo-brutal" loading="lazy" />
+          <span className="team-name title-display">{teams.home.name}</span>
         </div>
 
-        <div className="match-score">
+        {/* Score */}
+        <div className="match-score-block">
           {finished || live ? (
-            <>
-              <span className={`score ${teams.home.winner ? 'score--winner' : ''}`}>{goals.home ?? 0}</span>
-              <span className="score-sep">—</span>
-              <span className={`score ${teams.away.winner ? 'score--winner' : ''}`}>{goals.away ?? 0}</span>
-            </>
+            <div className="score-wrapper">
+              <span className={`score-number title-display ${teams.home.winner ? 'winner-text' : ''}`}>{goals.home ?? 0}</span>
+              <span className="score-div title-display">VS</span>
+              <span className={`score-number title-display ${teams.away.winner ? 'winner-text' : ''}`}>{goals.away ?? 0}</span>
+            </div>
           ) : (
-            <span className="score-time">{timeStr}</span>
+            <div className="time-wrapper">
+              <span className="time-text title-display">{timeStr}</span>
+              <span className="date-text">{dateStr}</span>
+            </div>
           )}
         </div>
 
-        <div className="match-team match-team--away">
-          <img className="team-logo" src={teams.away.logo} alt={teams.away.name} loading="lazy" />
-          <span className="team-name">{teams.away.name}</span>
+        {/* Away Team */}
+        <div className="match-team match-team--reverse">
+          <img src={teams.away.logo} alt={teams.away.name} className="team-logo-brutal" loading="lazy" />
+          <span className="team-name title-display">{teams.away.name}</span>
         </div>
+
       </div>
 
-      {/* Gols */}
+      {/* Goal Scorers Block (Only if goals exist) */}
       {(homeGoals.length > 0 || awayGoals.length > 0) && (
-        <div className="match-card__events">
-          <div className="events-col events-col--home">
+        <div className="match-events">
+          <div className="events-col">
             {homeGoals.map((e, i) => (
-              <span key={i} className="goal-event">
-                ⚽ {e.player.name.split(' ').pop()} <span className="goal-min">{e.time.elapsed}'</span>
-              </span>
+              <div key={i} className="goal-row">
+                 <span className="goal-min">{e.time.elapsed}'</span>
+                 <span className="goal-player">{e.player.name.split(' ').pop()}</span>
+              </div>
             ))}
           </div>
           <div className="events-col events-col--away">
             {awayGoals.map((e, i) => (
-              <span key={i} className="goal-event">
-                <span className="goal-min">{e.time.elapsed}'</span> {e.player.name.split(' ').pop()} ⚽
-              </span>
+               <div key={i} className="goal-row">
+                 <span className="goal-player">{e.player.name.split(' ').pop()}</span>
+                 <span className="goal-min">{e.time.elapsed}'</span>
+              </div>
             ))}
           </div>
         </div>
       )}
 
-      {/* Stats */}
-      {statistics.length > 0 && (
-        <div className="match-card__stats">
-          <div className="stat-row">
-            <span className="stat-val">{getStat(statistics, teams.home.id, 'Ball Possession')}</span>
-            <span className="stat-label">Posse</span>
-            <span className="stat-val">{getStat(statistics, teams.away.id, 'Ball Possession')}</span>
-          </div>
-          <div className="stat-row">
-            <span className="stat-val">{getStat(statistics, teams.home.id, 'Shots on Goal')}</span>
-            <span className="stat-label">Chutes no gol</span>
-            <span className="stat-val">{getStat(statistics, teams.away.id, 'Shots on Goal')}</span>
-          </div>
-        </div>
-      )}
-
-      {/* Footer */}
-      <div className="match-card__footer">
-        {pending && <span className="match-venue">{info.venue.name ?? 'A definir'}</span>}
-        {pending && <span className="match-date">{dateStr} · {timeStr}</span>}
-        {!pending && info.venue.name && <span className="match-venue">{info.venue.name}</span>}
+      {/* Action footer */}
+      <div className="match-footer block-solid">
+        <button className="btn-brutal btn-brutal--primary w-full">
+          {live ? 'ACOMPANHAR AO VIVO' : finished ? 'LER PÓS-JOGO (IA)' : 'PRÉ-JOGO'}
+        </button>
       </div>
 
     </article>

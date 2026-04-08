@@ -54,7 +54,7 @@ interface SeasonSelectorProps {
 }
 
 const SeasonSelector: React.FC<SeasonSelectorProps> = ({ selected, onChange, cachedYears, loadingYears }) => (
-  <div className="season-selector glass">
+  <div className="season-selector block-outline">
     <span className="season-selector__label">Temporada</span>
     <div className="season-selector__options">
       {SEASON_OPTIONS.map(({ year, free }) => {
@@ -88,7 +88,7 @@ const SeasonSelector: React.FC<SeasonSelectorProps> = ({ selected, onChange, cac
 
 // ── Auto-fetch Loading State ───────────────────────────────── 
 const AutoFetchingState: React.FC<{ season: number }> = ({ season }) => (
-  <div className="auto-fetch-state glass-elevated animate-fade-up">
+  <div className="auto-fetch-state block-outline-elevated animate-snap">
     <div className="auto-fetch-spinner-lg" />
     <div className="auto-fetch-text">
       <p className="auto-fetch-title">Carregando Brasileirão {season}...</p>
@@ -106,7 +106,7 @@ const AutoFetchingState: React.FC<{ season: number }> = ({ season }) => (
 
 // ── Pro Gate ───────────────────────────────────────────────── 
 const ProGate: React.FC<{ season: number }> = ({ season }) => (
-  <div className="pro-gate glass animate-fade-up">
+  <div className="pro-gate block-outline animate-snap">
     <div className="pro-gate__icon">🔒</div>
     <h3 className="pro-gate__title">Temporada {season} — Plano Pro</h3>
     <p className="pro-gate__desc">
@@ -126,7 +126,7 @@ const ProGate: React.FC<{ season: number }> = ({ season }) => (
 
 // ── Error State ────────────────────────────────────────────── 
 const ErrorState: React.FC<{ season: number; error: string; onRetry: () => void }> = ({ season, error, onRetry }) => (
-  <div className="error-state glass animate-fade-up">
+  <div className="error-state block-outline animate-snap">
     <span className="error-state__icon">⚠️</span>
     <div>
       <p className="error-state__title">Erro ao carregar temporada {season}</p>
@@ -149,7 +149,7 @@ const CalendarView: React.FC<{ season: number }> = ({ season }) => {
   const finishedCount = calendar.fixtures.filter(f => ['FT','AET','PEN'].includes(f.fixture.status.short)).length;
 
   return (
-    <div className="calendar-view animate-fade-up">
+    <div className="calendar-view animate-snap">
 
       {/* Stats */}
       <div className="calendar-stats">
@@ -159,14 +159,14 @@ const CalendarView: React.FC<{ season: number }> = ({ season }) => {
           { num: finishedCount,                         label: 'Encerradas'       },
           { num: calendar.totalFixtures - finishedCount,label: 'Pendentes'        },
         ].map(({ num, label }) => (
-          <div key={label} className="cal-stat glass-elevated">
+          <div key={label} className="cal-stat block-outline-elevated">
             <span className="cal-stat__num">{num}</span>
             <span className="cal-stat__label">{label}</span>
           </div>
         ))}
 
         {/* Fonte dos dados */}
-        <div className={`cal-stat glass-elevated cal-stat--source ${src.cls}`}>
+        <div className={`cal-stat block-outline-elevated cal-stat--source ${src.cls}`}>
           <span className="cal-stat__num" style={{ fontSize: '1.4rem' }}>{src.icon}</span>
           <span className="cal-stat__label">{src.text}</span>
         </div>
@@ -186,7 +186,7 @@ const CalendarView: React.FC<{ season: number }> = ({ season }) => {
       </div>
 
       {/* Rounds list */}
-      <div className="rounds-list glass">
+      <div className="rounds-list block-outline">
         <div className="rounds-list__header">
           <span>Rodada</span><span>Partidas</span><span>Status</span><span>IDs das Fixtures</span>
         </div>
@@ -221,7 +221,7 @@ const CalendarView: React.FC<{ season: number }> = ({ season }) => {
               {isExpanded && (
                 <div className="round-row__matches">
                   {fixtures.map(f => (
-                    <div key={f.fixture.id} className="mini-fixture glass">
+                    <div key={f.fixture.id} className="mini-fixture block-outline">
                       <span className="mini-id">#{f.fixture.id}</span>
                       <img src={f.teams.home.logo} className="mini-logo" alt="" />
                       <span className="mini-team">{f.teams.home.name}</span>
@@ -296,7 +296,7 @@ const RoundsView: React.FC<{ season: number }> = ({ season }) => {
   if (loading) return <AutoFetchingState season={season} />;
 
   if (!calendar) return (
-    <div className="db-empty animate-fade-up">
+    <div className="db-empty animate-snap">
       <div className="db-empty__icon">📅</div>
       <p className="db-empty__title">Calendário não disponível</p>
       <p className="db-empty__desc">Acesse <strong>Visão Geral</strong> para carregar a temporada {season}.</p>
@@ -310,7 +310,7 @@ const RoundsView: React.FC<{ season: number }> = ({ season }) => {
   const enrichedRound   = database?.rounds.find(r => r.roundNumber === activeRound);
 
   return (
-    <div className="rounds-view animate-fade-up">
+    <div className="rounds-view animate-snap">
       <div className="round-tabs">
         {rounds.map(([rName, fixtures]) => {
           const num    = parseRoundNumber(rName);
@@ -334,7 +334,7 @@ const RoundsView: React.FC<{ season: number }> = ({ season }) => {
       ) : (
         <div className="basic-fixtures-grid">
           {currentFixtures.map(f => (
-            <div key={f.fixture.id} className="basic-fixture-card glass">
+            <div key={f.fixture.id} className="basic-fixture-card block-outline">
               <div className="bfc-header">
                 <span className="bfc-id">#{f.fixture.id}</span>
                 <span className="bfc-status">{f.fixture.status.short}</span>
@@ -375,7 +375,7 @@ const TeamsView: React.FC<{ season: number }> = ({ season }) => {
   if (loading) return <AutoFetchingState season={season} />;
 
   if (!calendar) return (
-    <div className="db-empty animate-fade-up">
+    <div className="db-empty animate-snap">
       <div className="db-empty__icon">🏟</div>
       <p className="db-empty__title">Calendário não disponível</p>
       <p className="db-empty__desc">Carregue a temporada na aba Visão Geral.</p>
@@ -395,11 +395,11 @@ const TeamsView: React.FC<{ season: number }> = ({ season }) => {
   const teams = [...teamsMap.values()].sort((a,b) => a.name.localeCompare(b.name));
 
   return (
-    <div className="teams-list animate-fade-up">
+    <div className="teams-list animate-snap">
       <p className="teams-note">{teams.length} equipes · Brasileirão Série A {season}</p>
       <div className="teams-grid">
         {teams.map(t => (
-          <div key={t.id} className="team-chip glass">
+          <div key={t.id} className="team-chip block-outline">
             <img src={t.logo} alt={t.name} className="team-chip-logo" />
             <span className="team-chip-name">{t.name}</span>
             <span className="team-chip-played">{t.played}J</span>
@@ -425,9 +425,9 @@ const DatabasePage: React.FC = () => {
     <main className="database-page">
 
       {/* Header */}
-      <div className="database-header animate-fade-up">
+      <div className="database-header animate-snap">
         <div>
-          <h1 className="database-title">Base de Dados</h1>
+          <h1 className="title-display">Base de Dados</h1>
           <p className="database-subtitle">
             {cachedYears.length > 0
               ? `${cachedYears.length} temporada${cachedYears.length > 1 ? 's' : ''} carregada${cachedYears.length > 1 ? 's' : ''} · Brasileirão Série A`
@@ -461,7 +461,7 @@ const DatabasePage: React.FC = () => {
       />
 
       {/* Sub-nav */}
-      <nav className="db-subnav glass">
+      <nav className="db-subnav block-outline">
         {(['overview','rounds','teams'] as DatabaseView[]).map(view => (
           <button
             key={view}
