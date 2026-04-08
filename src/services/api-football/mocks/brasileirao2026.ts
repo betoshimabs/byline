@@ -10,7 +10,7 @@
 //
 // Custo total: 3 requests (dentro do limite free de 100/dia)
 
-import { APIFootballResponse } from '../../types/fixture';
+import { APIFootballResponse } from '../../../types/fixture';
 
 // Será preenchido com a resposta real da API após o teste de integração
 // Substitua 'null' pelo objeto JSON retornado pela API
