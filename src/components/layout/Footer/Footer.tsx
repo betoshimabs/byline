@@ -1,3 +1,4 @@
+import logoImg from '../../../assets/logo.png';
 import './Footer.css';
 
 const Footer = () => {
@@ -7,7 +8,7 @@ const Footer = () => {
         
         {/* Branding Column */}
         <div className="footer-brand">
-          <h2 className="title-display footer-logo">BYLINE<span className="logo-dot">.</span></h2>
+          <img src={logoImg} alt="BYLINE Inteligência Editorial" className="footer-logotype-img" />
           <p className="footer-desc">
             Ecossistema nativo de Inteligência Artificial focado em redação esportiva autônoma e geração de notícias em tempo real.
           </p>

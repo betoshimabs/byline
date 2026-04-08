@@ -1,4 +1,5 @@
 import { useTheme, Theme } from '../../../context/ThemeContext';
+import logoImg from '../../../assets/logo.png';
 import './Header.css';
 
 type AppTab = 'principal' | 'database';
@@ -41,10 +42,9 @@ const Header: React.FC<HeaderProps> = ({ activeTab, onTabChange, hasData = false
             <span className="header-date hidden-mobile">{today}</span>
           </div>
 
-          {/* Center: Logotype */}
+          {/* Center: Logotype (Official Image) */}
           <div className="header-center" onClick={() => onTabChange('principal')} role="button" aria-label="Home">
-            <h1 className="header-logotype title-display">BYLINE<span className="logo-dot">.</span></h1>
-            <span className="logotype-subtitle">INTELIGÊNCIA EDITORIAL</span>
+            <img src={logoImg} alt="BYLINE Inteligência Editorial" className="header-logotype-img" />
           </div>
 
           {/* Right: Theme Switcher */}

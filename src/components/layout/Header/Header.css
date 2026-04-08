@@ -65,23 +65,11 @@
   border-left: 1px solid var(--border);
 }
 
-.header-logotype {
-  font-size: 3.5rem; /* Reduzido de 8rem */
-  line-height: 0.9;
-  color: var(--text-primary);
-  letter-spacing: -0.02em;
-}
-
-.logo-dot {
-  color: var(--accent);
-}
-
-.logotype-subtitle {
-  font-size: 0.65rem;
-  font-weight: 700;
-  letter-spacing: 0.25em;
-  text-transform: uppercase;
-  color: var(--text-muted);
+.header-logotype-img {
+  height: 60px;
+  width: auto;
+  object-fit: contain;
+  display: block;
 }
 
 /* ── Theme Switcher ───────────────────────────────────────── */
@@ -178,7 +166,7 @@
 
 /* ── Responsive ───────────────────────────────────────────── */
 @media (max-width: 768px) {
-  .header-logotype { font-size: 2.5rem; }
+  .header-logotype-img { height: 45px; }
   .hidden-mobile { display: none !important; }
   .header-editorial-inner {
     grid-template-columns: auto 1fr auto;
