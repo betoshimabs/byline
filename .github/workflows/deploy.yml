@@ -39,7 +39,8 @@ jobs:
       - name: Build
         run: npm run build
         env:
-          # A chave da API fica como secret no GitHub → Settings → Secrets
+          # Ambas as variáveis ficam como secrets no GitHub
+          # Settings → Secrets and variables → Actions → New repository secret
           VITE_API_FOOTBALL_KEY: ${{ secrets.VITE_API_FOOTBALL_KEY }}
           VITE_API_FOOTBALL_URL: ${{ secrets.VITE_API_FOOTBALL_URL }}
 
